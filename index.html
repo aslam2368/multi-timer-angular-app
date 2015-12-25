@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="StopWatch">
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="icon" href="favicon.ico"> -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- JavaScript libraries  -->
+<!--<script src="lib/jquery.min.js"></script>-->
+    
+<!-- JavaScript UI libraries  -->
+<!--<script src="lib/jquery-ui-1.10.3.custom.js"></script>
+<script src="lib/jquery-ui.js"></script>-->
+<!--<script src="js/lib/bootstrap.min.js"></script>-->
+<script type="text/javascript" src="js/lib/angular.js"></script>
+<script type="text/javascript" src="js/stopwatch.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<!--<script type="text/javascript" src="js/lib/angular-route.js"></script>-->
+<title>Stopwatch App</title>
+</head>
+<body>
+     <div id="header" class="navbar ">
+         <nav class="navbar navbar-default navbar-fixed-top">
+              <div class="container">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">Stop Watch</a>
+                </div>
+              </div>
+        </nav>
+    </div>
+	 <div id="content" ng-controller="stopwatchCtrl">
+        <div class="container">
+      <div class="page-header center">
+        <h1>Stop Watch</h1>
+      </div>
+         <p class="lead"></p>
+         <div ng-repeat="stopWatch in stopWatches">
+             <div class="timer-instance">
+                 <span class="timer-badge"><span ng-if="stopWatch.time.hr<10">0</span>{{stopWatch.time.hr}}</span>:
+                 <span class="timer-badge"><span ng-if="stopWatch.time.min<10">0</span>{{stopWatch.time.min}}</span>:
+                 <span class="timer-badge"><span ng-if="stopWatch.time.sec<10">0</span>{{stopWatch.time.sec}}</span>:
+                 <span class="timer-badge"><span ng-if="stopWatch.time.mSec<10">0</span>{{stopWatch.time.mSec}}</span><br/>
+            </div>
+             <div class="button-holder">
+              <button class="btn btn-success" ng-disabled="stopWatch.status=='stopped' || stopWatch.status=='started'" ng-click="stopWatch.start()">Start</button>
+              <button class="btn btn-info" ng-disabled="stopWatch.status=='stopped' || stopWatch.status=='init'" ng-click="stopWatch.lap()">Split</button>
+              <button class="btn btn-danger" ng-disabled="stopWatch.status=='init'" ng-click="stopWatch.stop($index)" ng-hide="stopWatch.status=='stopped'">Stop</button>
+             <button class="btn btn-danger" ng-show="stopWatch.status=='stopped'" ng-click="stopWatch.reset()">Reset</button>
+             </div>
+              <br/>
+             <table ng-show="stopWatch.laps.length" class="table table-bordered table-striped splitTimes">
+                <tr>
+                  <th colspan="3">Sr. No</td>
+                  <th colspan="6">Total Duration</td>
+                  <th colspan="6">Lap Duration</td>
+                </tr>
+              <tr ng-repeat="lap in stopWatch.laps">
+                 <td colspan="3">#{{$index+1}}</td>
+                 <td colspan="6">
+                     <span><span ng-if="lap.totalDuration.hr<10">0</span>{{lap.totalDuration.hr}}</span>:
+                     <span><span ng-if="lap.totalDuration.min<10">0</span>{{lap.totalDuration.min}}</span>:
+                     <span><span ng-if="lap.totalDuration.sec<10">0</span>{{lap.totalDuration.sec}}</span>:
+                     <span><span ng-if="lap.totalDuration.mSec<10">0</span>{{lap.totalDuration.mSec}}</span>
+                 </td>
+                 <td colspan="6">
+                     <span><span ng-if="lap.lapDuration.hr<10">0</span>{{lap.lapDuration.hr}}</span>:
+                     <span><span ng-if="lap.lapDuration.min<10">0</span>{{lap.lapDuration.min}}</span>:
+                     <span><span ng-if="lap.lapDuration.sec<10">0</span>{{lap.lapDuration.sec}}</span>:
+                     <span><span ng-if="lap.lapDuration.mSec<10">0</span>{{lap.lapDuration.mSec}}</span>
+                 </td>
+              </tr>
+             </table>
+            <hr/>
+          </div>
+          <div class="center">
+              <button class="btn btn-primary" ng-click="createStopWatch()">Add Stop Watch</button>
+          </div>
+        </div>
+
+         
+      </div>
+      <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; 2015 All rights reserved.</p>
+      </div>
+    </footer>
+</body>
+</html>

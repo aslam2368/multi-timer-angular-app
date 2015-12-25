@@ -1,0 +1,46 @@
+#header{
+    
+}
+
+.footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background: #ccc;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+.button-holder{
+    margin-bottom: 10px;
+}
+span.timer-badge {
+    font-size: 45px;
+    background: #ccc;
+    padding: 3px;
+    border-radius: 15%;
+    margin-top: 10px;
+    margin-left: -6px;
+    margin-right: 5px;
+}
+.timer-instance{
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.center{
+    text-align: center;
+}
+.sw-tag{
+    font-size: 15px;
+}
+#content {
+    padding-bottom: 55px;
+    text-align: center;
+}
+.splitTimes{
+    font-size: 18px !important;
+    width: 60% !important;
+    margin: 0px auto;
+    text-align: left !important;
+}
